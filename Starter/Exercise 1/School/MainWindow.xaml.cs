@@ -57,12 +57,44 @@ namespace School
         // When the user presses a key, determine whether to add a new student to a class, remove a student from a class, or modify the details of a student
         private void studentsList_KeyDown(object sender, KeyEventArgs e)
         {
-            // TODO: Exercise 1: Task 1a: If the user pressed Enter, edit the details for the currently selected student
+            Student student;
+            StudentForm sf = new StudentForm();
+
+            switch(e.Key)
+            {
+                case Key.Enter: // TODO: Exercise 1: Task 1a: If the user pressed Enter, edit the details for the currently selected student
+                    student = this.studentsList.SelectedItem as Student;
+
+                    sf.Title = "Edit Student Details";
+                    sf.firstName.Text = student.FirstName;
+                    sf.lastName.Text = student.LastName;
+                    sf.dateOfBirth.Text = student.DateOfBirth.ToString("d");
+
+                    if(sf.ShowDialog().Value)
+                    {
+                        student.FirstName = sf.firstName.Text;
+                        student.FirstName = sf.lastName.Text;
+                        sf.dateOfBirth.Text = student.DateOfBirth.ToString("d");
+
+                        saveChanges.IsEnabled = true;
+                    }
+                    break;
+                case Key.Insert:
+                    student = new Student();
+
+
+                    break;
+                case Key.Delete:
+                    student = this.studentsList.SelectedItem as Student;
+
+
+                    break;
             // TODO: Exercise 1: Task 2a: Use the StudentsForm to display and edit the details of the student
             // TODO: Exercise 1: Task 2b: Set the title of the form and populate the fields on the form with the details of the student
             // TODO: Exercise 1: Task 3a: Display the form
             // TODO: Exercise 1: Task 3b: When the user closes the form, copy the details back to the student
             // TODO: Exercise 1: Task 3c: Enable saving (changes are not made permanent until they are written back to the database)
+            }
         }
 
         #region Predefined code
